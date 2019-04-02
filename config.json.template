@@ -1,0 +1,4 @@
+{
+  "WHITELIST":  <list con ids de chats permitidos>,
+  "BOT_KEY": "llave entregada por @BotFather"
+}
