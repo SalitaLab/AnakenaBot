@@ -89,11 +89,12 @@ def doc(bot, update, user_data):
 
         from subprocess import call
         call(['pdf2ps', pdf_file])
-        update.message.reply_text(f"duplex '{ps_file}' | lpr -P {printers[user_data['printer']]}")
-        # p1 = subprocess.Popen(["duplex", ps_file], stdout=subprocess.PIPE)
-        # p2 = subprocess.Popen(["lpr", "-P", printers[user_data['printer']]], stdin=p1.stdout, stdout=subprocess.PIPE)
-        # p1.stdout.close()
-        # p2.communicate()
+        # update.message.reply_text(f"duplex '{ps_file}' | lpr -P {printers[user_data['printer']]}")
+        p1 = subprocess.Popen(["/usr/local/bin/duplex", ps_file], stdout=subprocess.PIPE)
+        p2 = subprocess.Popen(["lpr", "-P", printers[user_data['printer']]], stdin=p1.stdout, stdout=subprocess.PIPE)
+        p1.stdout.close()
+        p2.communicate()
+        update.message.reply_text(f"Success")
 
     return ConversationHandler.END
 
